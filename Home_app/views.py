@@ -1,5 +1,7 @@
 from django.shortcuts import render ,HttpResponse
 from Home_app.models import Reservations
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -13,9 +15,12 @@ def contact(request):
         phone=request.POST.get('phone')
         people=request.POST.get('people')
         date=request.POST.get('date')
+        time=request.POST.get('time')
         message=request.POST.get('message')
-        r=Reservations(name=name,email=email,phone=phone,people=people,date=date, message=message);
+        r=Reservations(name=name,email=email,phone=phone,people=people,date=date, time=time,message=message);
         r.save();
+        messages.success(request, 'Your message has been sent.') 
+
     return render(request,'contact.html')
 def about(request):
     return render(request,'about.html')
